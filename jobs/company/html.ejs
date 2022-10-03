@@ -1,0 +1,109 @@
+<% const entry = values[0];%>
+<% if(entry) { %>
+
+<div class="max-w-4xl flex items-center flex-wrap mx-auto text-gray-900"> 
+  <div
+    class="w-full lg:w-4/5 rounded-lg lg:rounded-l-lg shadow-2xl bg-white mx-6 lg:mx-0"
+  > 
+    <div class="p-4 md:p-8 text-center lg:text-left">
+      <!-- Image for mobile view-->
+      <div
+        class="block  lg:hidden rounded-lg shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center"
+        style="background-image: url('<%=entry.logo.url %>')"
+      ></div>
+ 
+      <h1 class="pl-4 text-3xl font-bold pt-8 lg:pt-0">
+        
+         <a href="<%= entry.Website %>" target="_blank">
+       <%=entry.Company%>
+      </a>
+        </h1>
+      
+     
+      <div class="p-4 mt-4 border-t text-xs">
+
+    <div class="text-gray-600 dark:text-gray-200 text-sm">
+      <%= entry.About %>
+    </div>
+    
+ 
+        
+        
+  </div>
+      
+      
+  <div class="  p-4 border-t border-b text-xs">
+    
+    
+        <div class="py-1 text-gray-600 dark:text-gray-200 text-xs">
+    <span class="text-xs px-1 mr-1 font-bold leading-none text-white bg-green-600 rounded-full">
+    <i class="fa fa-rocket"></i> <%= entry['Remote status'] %>
+     </span>
+    <span class="text-xs px-1 mr-1 font-bold leading-none text-white bg-blue-600 rounded-full">
+      <i class="fa fa-user"></i> <%= entry.Employees %>
+     </span>
+    <span class="text-xs px-1 mr-1 font-bold leading-none text-white bg-purple-600 rounded-full">
+      <i class="fa fa-building"></i> <%= entry.Type %>
+     </span>
+       <a href="<%= entry['Twitter url'] %>" target="_blank">
+    <span class="text-xs px-1 mr-1 font-bold leading-none text-white bg-blue-300 rounded-full">
+      <i class="fa fa-twitter"></i>
+     </span>   
+     </a>
+  </div>
+    
+    
+  
+    <div class="py-1 ">
+      <% 
+      const markets = entry.Markets ?  entry.Markets : []
+      for(const tag of markets) { %>
+          <span class="text-xs px-2 mr-1 font-bold leading-none text-white bg-gray-600 rounded-full">
+          <%= tag %>
+          </span>
+      <% } %> 
+    </div>
+    
+     <div class="py-1  text-gray-600 dark:text-gray-200 text-xs">
+  
+    
+    
+    <%
+    	const val = entry['Glassdoor rating']
+    	const renderStar = (val, rt) => `<i class="fa ${val>=rt? "fa-star":"fa-star-o"}"></i>`;
+    %>
+    <% if(val) { %>
+      
+      
+      <a href="<%= entry['Glassdoor url'] %>" target="_blank">
+        <i class="fa fa-external-link"></i>
+      </a>
+      
+    <% let i = 1; for( i = 1; i<= 5; i++) { %>
+     <%-renderStar(val, i);%>
+    <% }%>
+      
+      
+    <% } %>
+       
+      
+    
+  </div>
+    
+  </div>
+      
+    </div>
+  </div>
+
+  <!--Img Col-->
+  <div class="w-full lg:w-1/5">
+    <img
+      src="<%=entry.logo.url%>"
+      class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block -mx-5"
+    />
+  </div>
+</div>
+
+<% } else { %>
+<div>Company not found</div>
+<% } %>
